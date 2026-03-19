@@ -1,0 +1,371 @@
+:root {
+    --bg-color: #050505;
+    --neon-green: #00ff41;
+    --dark-green: #008f11;
+    --text-main: #e0e0e0;
+    --card-bg: rgba(10, 20, 10, 0.85);
+    --font-main: 'Time New Roman', Times, serif ;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    font-size: 1em;
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Matrix Canvas */
+#matrix-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    background: rgba(0, 10, 0, 0.95);
+    border-right: 1px solid var(--dark-green);
+    padding: 2rem 1rem;
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.profile-img {
+    width: 140px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid var(--neon-green);
+    box-shadow: 0 0 15px var(--neon-green);
+    /* Yahan COVER ki jagah CONTAIN kar diya gaya hai */
+    object-fit: fill; 
+    background-color: #000; /* Empty space cover karne ke liye black background */
+    margin-bottom: 1rem;
+}
+
+.profile h1 {
+    font-size: 1.5rem;
+    color: var(--neon-green);
+    margin-bottom: 0.5rem;
+}
+
+.profile .title {
+    font-size: 1rem;
+    color: #aaa;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.menu a {
+    text-decoration: none;
+    color: var(--text-main);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    transition: all 0.5s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu a:hover {
+    background: var(--neon-green);
+    color: black;
+    font-weight: bolder;
+    box-shadow: inset 7px 0 2px var(--dark-green);
+}
+
+/* Main Content */
+.content {
+    margin-left: 280px;
+    padding: 6rem;
+    width: calc(100% - 280px);
+}
+
+section {
+    margin-bottom: 5rem;
+}
+
+h2 {
+    color: var(--neon-green);
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--dark-green);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+/* Cards & Layouts */
+.glass-card, .card {
+    background: var(--card-bg);
+    border: 1px solid var(--dark-green);
+    border-radius: 10px;
+    padding: 2rem;
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover, .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+    border-color: var(--neon-green);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Carousels */
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 250px; /* Height thori barha di hai taake details wazeh hon */
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 1rem 0;
+    border: 1px solid var(--dark-green);
+    background-color: rgba(0, 0, 0, 0.8); /* Slider ke peeche dark background */
+}
+
+.carousel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.slide[data-active] {
+    opacity: 1;
+    z-index: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    /* Yahan bhi CONTAIN apply kiya gaya hai */
+    object-fit: contain; 
+}
+
+.carousel-btn {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.8);
+    color: var(--neon-green);
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0 0.5rem;
+    transition: 0.2s;
+}
+.carousel-btn:hover { color: white; background: var(--dark-green); }
+.carousel-btn.prev { left: 0; }
+.carousel-btn.next { right: 0; }
+
+/* Tags & Buttons */
+.tags { margin: 1rem 0; }
+.tags span {
+    background: var(--dark-green);
+    color: black;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    font-weight: bold;
+}
+
+.btn, .btn-small {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    color: var(--neon-green);
+    border: 1px solid var(--neon-green);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+    margin-top: 1rem;
+}
+
+.btn:hover, .btn-small:hover {
+    background: var(--neon-green);
+    color: black;
+    box-shadow: 0 0 10px var(--neon-green);
+}
+
+/* Skills Grid */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-card {
+    background: var(--card-bg);
+    border: 1px solid var(--dark-green);
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 10px;
+    transition: all 0.3s;
+    cursor: default;
+}
+
+.skill-card i {
+    font-size: 3rem;
+    color: var(--neon-green);
+    margin-bottom: 0.5rem;
+    transition: 0.3s;
+}
+
+.skill-card:hover {
+    transform: scale(1.1);
+    border-color: var(--neon-green);
+    box-shadow: 0 0 15px var(--neon-green);
+}
+.skill-card:hover i { text-shadow: 0 0 10px var(--neon-green); }
+
+/* Education */
+.edu-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.edu-logos .logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain; /* Ye pehle se theek tha */
+    background: white; 
+    border-radius: 100%;
+    padding: 0px;
+}
+.edu-text .highlight {  font-weight: bold; }
+
+/* Certifications / Images */
+.cert-img {
+    width: 100%;
+    height: 180px;
+    /* Certifications ko full dikhane ke liye CONTAIN */
+    object-fit: contain; 
+    background-color: rgba(0,0,0,0.5); /* Background color add kiya hai */
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.cert-img:hover { opacity: 0.8; }
+
+/* Social Grid */
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+.social-btn {
+    padding: 1rem;
+    border: 1px solid var(--dark-green);
+    color: var(--text-main);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+    background: var(--card-bg);
+}
+.social-btn:hover {
+    transform: scale(1.05);
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+/* Modal */
+.modal {
+    display: none; position: fixed; z-index: 100;
+    padding-top: 50px; left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.9);
+}
+.modal-content {
+    margin: auto; display: block;
+    max-width: 90%; max-height: 85vh; /* Thora bara kiya hai taake click karne par full parh saken */
+    object-fit: contain; /* Modal mein bhi image puri ayegi */
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 20px var(--neon-green);
+}
+.close {
+    position: absolute; top: 15px; right: 35px;
+    color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer;
+}
+.close:hover { color: var(--neon-green); }
+/* --- NEW BANNER LAYOUT FOR ABOUT SECTION --- */
+.banner-layout {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.about-text {
+    flex: 1; /* Text ko aadhi jagah dega */
+    font-size: 1.5rem;
+    line-height: 1.6;
+}
+
+#about .carousel {
+    flex: 1; /* Slider ko baqi aadhi jagah dega */
+    height: 300px; /* Slider ki fixed height taake design kharab na ho */
+    margin: 0; /* Extra space remove karne ke liye */
+    border-radius: 10px;
+}
+
+#about .carousel .slide img{
+    object-fit: cover;
+}
+
+/* Mobile Screens ke liye adjust karega */
+@media (max-width: 768px) {
+    .banner-layout {
+        flex-direction: column; /* Mobile par upar/neeche stack karega */
+    }
+    
+    #about .carousel {
+        width: 100%;
+        height: 250px;
+    }
+}

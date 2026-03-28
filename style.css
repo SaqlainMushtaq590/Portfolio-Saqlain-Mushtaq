@@ -285,6 +285,7 @@ h2 {
     margin-bottom: 1rem;
     cursor: pointer;
     transition: 0.3s;
+    display: block;
 }
 .cert-img:hover { opacity: 0.8; }
 
